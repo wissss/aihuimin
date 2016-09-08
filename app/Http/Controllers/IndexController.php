@@ -15,6 +15,6 @@ class IndexController extends Controller
         $redis->set("name","Taylor");
         $red = $redis->get("name");
         print_r($red);
-        
+
     }
 }

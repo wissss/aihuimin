@@ -12,8 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Session::get('uname')!=""){
+        return redirect("index");
+    }else{
+        return view('login.login');
+    }
 });
 
-
 Route::get('index','IndexController@index');
+//登录提交信息
+Route::post("login_in","LoginController@login_in");
+//获取验证码信息
+Route::get('kit/captcha/{tmp}', 'LoginController@captcha');
