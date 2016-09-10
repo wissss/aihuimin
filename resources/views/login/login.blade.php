@@ -29,9 +29,7 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-
-                <h1 class="logo-name"><img width="190px;" class="imgs" height="190px;" src="style/img/piupiupiu.jpg"></h1>
-
+                <h1 class="logo-name"><img width="190px;" class="imgs" height="190px;" src="style/img/piupiupiu.jpg"></h1
             </div>
             <h3 class="xin">欢迎主人登录</h3>
 
@@ -66,8 +64,6 @@
     <!-- Mainly scripts -->
     <script src="style/js/jquery-2.1.1.min.js"></script>
     <script src="style/js/bootstrap.min.js?v=3.4.0"></script>
-
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script><!--统计代码，可删除-->
 
 </body>
 

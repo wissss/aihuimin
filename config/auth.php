@@ -66,12 +66,20 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => App\User::class,
+            'driver' => 'hdhm',
+            'model' => App\Http\Model\User::class,
         ],
+        'role'=>[
+            'driver'=>'hdhm',
+            'model'=>App\Http\Model\Role::class,
+        ],
+        'privilege'=>[
+            'driver'=>'hdhm',
+            'model'=>App\Http\Model\Privilege::class,
+        ]
 
         // 'users' => [
-        //     'driver' => 'database',
+        //     'driver' => 'hdhm',
         //     'table' => 'users',
         // ],
     ],

@@ -22,5 +22,12 @@ Route::get('/', function () {
 Route::get('index','IndexController@index');
 //登录提交信息
 Route::post("login_in","LoginController@login_in");
+//退出
+Route::get("login_out","LoginController@login_out");
+
 //获取验证码信息
 Route::get('kit/captcha/{tmp}', 'LoginController@captcha');
+//skinconf
+Route::get("skinconf","IndexController@skinconf");
+//文章列表
+Route::get("article","ArticleController@index");

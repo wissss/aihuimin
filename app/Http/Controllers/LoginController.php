@@ -15,10 +15,12 @@ class LoginController extends Controller
     public function login_in(Request $request)
     {
         //接受post值
+        if(Session::get("uname")!=""){
+            return redirect('index');
+        }
         $data  = $request->all();
         $Login = new Login();
         $pro   = $Login->login_in($data);
-        header("content-type:text/html;charset=utf8");
         if($pro['msg']=="ok"){
             return redirect('index');
         }else{
@@ -43,5 +45,14 @@ class LoginController extends Controller
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
+    }
+    //退出
+    public function login_out(Request $request)
+    {
+        Session::flush();
+        $url = $request->fullurl('/');
+        $surl = strrpos($url,"/");
+        $url = substr($url,0,$surl);
+        echo "<script>alert('退出成功');location.href='$url';</script>";
     }
 }

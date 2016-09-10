@@ -4,6 +4,10 @@ namespace App\Http\Model;
 use Validator,DB,Session;
 use Illuminate\Database\Eloquent\Model;
 
+/*
+ * 用户信息注册登录 model
+ */
+
 class Login extends Model
 {
     /*
