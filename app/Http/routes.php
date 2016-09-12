@@ -31,3 +31,10 @@ Route::get('kit/captcha/{tmp}', 'LoginController@captcha');
 Route::get("skinconf","IndexController@skinconf");
 //文章列表
 Route::get("article","ArticleController@index");
+
+
+
+
+//用户中心管理--头像管理
+Route::get("uhead","UserController@uhead");
+

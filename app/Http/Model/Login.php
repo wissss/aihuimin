@@ -3,7 +3,7 @@
 namespace App\Http\Model;
 use Validator,DB,Session;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Redis as Redis;
 /*
  * 用户信息注册登录 model
  */
@@ -59,6 +59,9 @@ class Login extends Model
                 ]);
                 Session::put("uid",$db['user_id']);
                 Session::put("uname",$db['username']);
+                //实例化redis
+                $redis = Redis::connection('default');
+                $redis->setex("uid","7200",json_encode($db['user_id']));
                 $msg = array(
                     'msg'=>"ok"
                 );

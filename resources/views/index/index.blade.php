@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 
     <meta charset="utf-8">
@@ -27,49 +26,34 @@
 
 <body>
     <div id="wrapper">
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="nav-header">
 
-                        <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="" />
-                             </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="{{url("index")}}">
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{Session::get('uname')}}</strong>
-                             </span> <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="form_avatar.html">修改头像</a>
-                                </li>
-                                <li><a href="profile.html">个人资料</a>
-                                </li>
-                                <li><a href="#">信箱</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="{{url("login_out")}}">安全退出</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">
-                            list
-                        </div>
-
-                    </li>
-                    @include("layouts.menu")
-                </ul>
-
-            </div>
-        </nav>
+        <!--左侧菜单开始-->
+        @include("layouts.menu")
+        <!--左侧菜单结束-->
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <div class="row border-bottom">
+
+                <!--头部导航开始-->
                 @include('layouts.nav')
+                <!--头部导航结束-->
+
             </div>
             <div class="row  border-bottom white-bg dashboard-header">
                 <div class="col-sm-12">
                     <blockquote class="text-warning" style="font-size:14px">
-                        1
+                        <h3>今日天气</h3>
+                        <ul>
+                            <li>当前城市：{{$weather['citynm'] or ""}}</li>
+                        </ul>
+                    </blockquote>
+                    <blockquote style="color:#fd6547;font-size:14px;margin-top:-20px;">
+                        <ul>
+                            <li>{{$weather['days'] or ""}}：{{$weather['week'] or ""}}</li>
+                            <li></li>
+                            <li>{{$weather['temperature'] or ""}}：{{$weather['weather'] or ""}}　<img src="{{$weather['weather_icon']}}" alt="气象图标"/></li>
+                            <li>{{$weather['wind']}}：{{$weather['winp']}}</li>
+                        </ul>
                     </blockquote>
 
                     <hr>

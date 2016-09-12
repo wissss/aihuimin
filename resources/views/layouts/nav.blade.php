@@ -8,7 +8,7 @@ if(!Session::get('uname')){
 ?>
 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
-        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
         <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
             <div class="form-group">
                 <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
@@ -17,16 +17,16 @@ if(!Session::get('uname')){
     </div>
     <ul class="nav navbar-top-links navbar-right">
         <li>
-            <span class="m-r-sm text-muted welcome-message"><a href="index.html" title="返回首页"><i class="fa fa-home"></i></a>欢迎{{Session::get('uname')}}主人</span>
+            <span class="m-r-sm text-muted welcome-message"><a href="javascript:void(0)" title="返回首页"><i class="fa fa-home"></i></a>欢迎{{Session::get('uname')}}主人</span>
         </li>
         <li class="dropdown">
-            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:void(0)">
                 <i class="fa fa-envelope"></i> <span class="label label-warning">标签</span>
             </a>
             <ul class="dropdown-menu dropdown-messages">
                 <li>
                     <div class="dropdown-messages-box">
-                        <a href="profile.html" class="pull-left">
+                        <a href="javascript:void(0)" class="pull-left">
                             <img alt="image" class="img-circle" src="">
                         </a>
                         <div class="media-body">
@@ -40,7 +40,7 @@ if(!Session::get('uname')){
                 <li class="divider"></li>
                 <li>
                     <div class="dropdown-messages-box">
-                        <a href="profile.html" class="pull-left">
+                        <a href="javascript:void(0)" class="pull-left">
                             <img alt="image" class="img-circle" src="">
                         </a>
                         <div class="media-body ">
@@ -54,7 +54,7 @@ if(!Session::get('uname')){
                 <li class="divider"></li>
                 <li>
                     <div class="text-center link-block">
-                        <a href="mailbox.html">
+                        <a href="javascript:void(0)">
                             <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
                         </a>
                     </div>
@@ -62,12 +62,12 @@ if(!Session::get('uname')){
             </ul>
         </li>
         <li class="dropdown">
-            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:void(0)">
                 <i class="fa fa-bell"></i> <span class="label label-primary">信息</span>
             </a>
             <ul class="dropdown-menu dropdown-alerts">
                 <li>
-                    <a href="mailbox.html">
+                    <a href="javascript:void(0)">
                         <div>
                             <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
                             <span class="pull-right text-muted small">4分钟前</span>
@@ -76,7 +76,7 @@ if(!Session::get('uname')){
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="profile.html">
+                    <a href="javascript:void(0)">
                         <div>
                             <i class="fa fa-qq fa-fw"></i> 3条新回复
                             <span class="pull-right text-muted small">12分钟钱</span>
@@ -86,7 +86,7 @@ if(!Session::get('uname')){
                 <li class="divider"></li>
                 <li>
                     <div class="text-center link-block">
-                        <a href="notifications.html">
+                        <a href="javascript:void(0)">
                             <strong>查看所有 </strong>
                             <i class="fa fa-angle-right"></i>
                         </a>

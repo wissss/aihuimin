@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Model\Login;
 use App\Http\Requests;
 use Gregwar\Captcha\CaptchaBuilder;
+use Illuminate\Support\Facades\Redis as Redis;
 use Session;
 class LoginController extends Controller
 {
@@ -49,6 +50,12 @@ class LoginController extends Controller
     //退出
     public function login_out(Request $request)
     {
+        //实例化redis
+        $redis = Redis::connection('default');
+
+        //删除redis中的部分数据
+        $redis->del("menu");
+        $redis->del("data");
         Session::flush();
         $url = $request->fullurl('/');
         $surl = strrpos($url,"/");
