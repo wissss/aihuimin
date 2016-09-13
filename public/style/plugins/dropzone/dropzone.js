@@ -289,7 +289,7 @@
 
                 Dropzone.prototype.defaultOptions = {
                     url: null,
-                    method: "post",
+                    method: "POST",
                     withCredentials: false,
                     parallelUploads: 2,
                     uploadMultiple: false,
@@ -299,7 +299,7 @@
                     maxThumbnailFilesize: 10,
                     thumbnailWidth: 100,
                     thumbnailHeight: 100,
-                    maxFiles: null,
+                    maxFiles: 99999,
                     params: {},
                     clickable: true,
                     ignoreHiddenFiles: true,

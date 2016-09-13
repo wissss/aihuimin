@@ -38,3 +38,7 @@ Route::get("article","ArticleController@index");
 //用户中心管理--头像管理
 Route::get("uhead","UserController@uhead");
 
+//用户中心图片上传
+Route::POST("file_upload","UserController@file_upload");
+//用户中心图片列表
+Route::get("albumlista","UserController@albumlista");
