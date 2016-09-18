@@ -40,5 +40,22 @@ Route::get("uhead","UserController@uhead");
 
 //用户中心图片上传
 Route::POST("file_upload","UserController@file_upload");
+
 //用户中心图片列表
 Route::get("albumlista","UserController@albumlista");
+
+//用户修改密码页面
+Route::get("upassw","UserController@upassw");
+
+//用户中心修改密码
+Route::post("update_pwd","UserController@update_pwd");
+
+//个人头像上传页面
+Route::get("upd_portrait","UserController@upd_portrait");
+
+//用户头像上传操作
+Route::post("add_portrait","UserController@add_portrait");
+
+//权限添加
+Route::get('padd',"PrivilegeController@padd");
+

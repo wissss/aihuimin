@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="footer" style="clear:both;">
     <div class="pull-right">
         By：<a href="#" target="_blank"></a>
     </div>

@@ -19,61 +19,34 @@ class User extends Model
          * 判断是否 为 管理员用户
          */
         $redis_uid = json_decode($redis->get("uid"));
-        if($redis_uid==1){
-            $redis->del("data");
-            if($redis->get("data")){
-                $data = $redis->get("data");
-                $datas = json_decode($data,true);
-                return $datas;
-            }else{
-                $uid = Session::get("uid");
-                $pro = DB::table("users")
-                    ->join("user_role","users.user_id","=","user_role.user_id")
-                    ->join("role","user_role.role_id","=","role.role_id")
-                    ->join("role_privilege","role.role_id","=","role_privilege.role_id")
-                    ->join("privilege","role_privilege.privilege_id","=","privilege.p_id")
-                    ->select(
-                        "users.user_id",
-                        "users.username",
-                        "role.role_name",
-                        "privilege.p_id",
-                        "privilege.p_name",
-                        "privilege.p_root",
-                        "privilege.p_way"
-                    )
-                    ->where("users.user_id",$uid)
-                    ->get();
-                $redis->setex("data","7200",json_encode($pro));
-                return $pro;
-            }
+        if($redis->get("data")){
+            $data = $redis->get("data");
+            $datas = json_decode($data,true);
+            return $datas;
         }else{
-            $redis->del("data");
-            if($redis->get("data")){
-                $data = $redis->get("data");
-                $datas = json_decode($data,true);
-                return $datas;
-            }else{
-                $uid = Session::get("uid");
-                $pro = DB::table("users")
-                    ->join("user_role","users.user_id","=","user_role.user_id")
-                    ->join("role","user_role.role_id","=","role.role_id")
-                    ->join("role_privilege","role.role_id","=","role_privilege.role_id")
-                    ->join("privilege","role_privilege.privilege_id","=","privilege.p_id")
-                    ->select(
-                        "users.user_id",
-                        "users.username",
-                        "role.role_name",
-                        "privilege.p_id",
-                        "privilege.p_name",
-                        "privilege.p_root",
-                        "privilege.p_way"
-                    )
-                    ->where("users.user_id",$uid)
-                    ->get();
-                $redis->setex("data","7200",json_encode($pro));
-                return $pro;
-            }
+            $uid = Session::get("uid");
+            $pro = DB::table("users")
+                ->join("user_role","users.user_id","=","user_role.user_id")
+                ->join("role","user_role.role_id","=","role.role_id")
+                ->join("role_privilege","role.role_id","=","role_privilege.role_id")
+                ->join("privilege","role_privilege.privilege_id","=","privilege.p_id")
+                ->select(
+                    "users.user_id",
+                    "users.username",
+                    "role.role_name",
+                    "privilege.p_id",
+                    "privilege.p_name",
+                    "privilege.p_root",
+                    "privilege.p_way",
+                    "role.role_name",
+                    "users.user_filedir"
+                )
+                ->where("users.user_id",$uid)
+                ->get();
+            $redis->set("data",json_encode($pro));
+            return $pro;
         }
+
     }
 
     //查询当前用户左侧菜单显示内容
@@ -135,10 +108,42 @@ class User extends Model
             return $msg['result'][0];
         }
     }
-    //user/uhead用户头像设置
-    public function uhead()
+    //user/update 用户修改密码
+    public function update_pwd($data)
     {
+        $uid = Session::get("uid");
+        $oldpwd = md5(md5($data['old_password']));
+        $newpwd = $data['new_password'];
+        $renewpwd = $data['renew_password'];
+        if(!preg_match('/^[a-zA-Z]{1}[a-zA-Z0-9_]{6,16}$/i',$newpwd)){
+            $msg = array(
+                "msg"=>"必须为字母开头"
+            );
+            return $msg;
+        }
+        if($newpwd!=$renewpwd){
+            $s = array("msg"=>"确认密码与密码不一致");
+            return $s;
+        }else{
+            $pro = DB::table("users")->where("password",$oldpwd)->first();
+            if($pro['password']==md5(md5($newpwd))){
+                $msg = array("msg"=>"新密码不能与原密码相同");
+                return $msg;
+            }
+            if($pro['password']){
+                $upd = DB::table("users")->where("user_id",$uid)->update([
+                    'password'=>md5(md5($newpwd))
+                ]);
+                $msg = array(
+                    "msg"=>"ok"
+                );
+                return $msg;
+            }else{
+                $s = array("msg"=>"当前密码不正确");
+                return $s;
+            }
 
+        }
     }
 
 }

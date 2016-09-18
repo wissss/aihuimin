@@ -3,23 +3,35 @@ use Illuminate\Support\Facades\Redis as Redis;
 $redis = Redis::connection('default');
 $data  = json_decode($redis->get("data"),true);
 $menu  = json_decode($redis->get("menu"),true);
+$route = Request::fullurl('/');
+$lastroute = substr($route,strrpos($route,"/")+1,555);
+if(!Session::get('uname')){
+    $url = Request::fullurl('/');
+    $surl = strrpos($url,"/");
+    $url = substr($url,0,$surl);
+    echo "<script>alert('登录超时,请重新登录');location.href='$url'</script>";
+}
 ?>
+
+<input type="hidden" id="url" value="<?php echo Request::fullurl('/')?>"  />
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
             <li class="nav-header">
-
-                <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="" />
-                             </span>
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="{{$data[0]['user_filedir'] or "style/img/profile_small.jpg"}}" />
+                    </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="{{url("index")}}">
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{Session::get('uname')}}</strong>
-                             </span> <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">{{Session::get('uname')}}</strong>
+                            </span>
+                            <span class="text-muted text-xs block">{{$data[0]['role_name']}} <b class="caret"></b></span>
+                        </span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a href="form_avatar.html">修改头像</a>
-                        </li>
-                        <li><a href="profile.html">个人资料</a>
+                        <li><a href="{{url("upd_portrait")}}">修改头像</a>
                         </li>
                         <li><a href="#">信箱</a>
                         </li>
@@ -38,7 +50,7 @@ $menu  = json_decode($redis->get("menu"),true);
                     <ul class="nav nav-second-level">
                         @foreach($menu as $mk=>$ms)
                             @if($ks['p_id']==$ms['parent_id'])
-                                <li><a href="{{URL("$ms[p_way]")}}">{{$ms['p_name'] or ""}}</a></li>
+                                <li class="<?php if($ms['p_way']==$lastroute){echo "active";}?>"><a href="{{URL("$ms[p_way]")}}">{{$ms['p_name'] or ""}}</a></li>
                             @endif
                         @endforeach
                     </ul>
